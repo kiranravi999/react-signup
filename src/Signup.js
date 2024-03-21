@@ -6,6 +6,7 @@ import Header from './Header'
 import { v4 as uuidv4 } from "uuid";
 
 export default function Signup() {
+  
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [nameError,setnameError]=useState(false)

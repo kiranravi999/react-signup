@@ -9,7 +9,6 @@ const SavedInterests = (props) => {
     Changed(item);
   };
   return (
-    
     <div>
       <input
         type="checkbox"

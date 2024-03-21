@@ -14,6 +14,7 @@ const router = createBrowserRouter([
     path: "/otp",
     element: <Otp />,
   },
+  
   {
     path: "/",
     element: <App />,

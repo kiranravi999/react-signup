@@ -11,6 +11,7 @@ const Otp = () => {
   function hideEmail(text) {
     
     const [localPart, domainPart] = text.split("@");
+    
     const firstThreeCharacters = localPart.slice(0, 3);
     const hiddenLocalPart = firstThreeCharacters + "*".repeat(localPart.length - 3);
     return hiddenLocalPart + "@" + domainPart;

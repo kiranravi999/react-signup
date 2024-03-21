@@ -9,7 +9,6 @@ const Login = () => {
   const [passwordError,setPasswordError]=useState(false)
   const [key, setKey] = useState(false);
   const navigate = useNavigate();
-
   const type = key ? "text" : "password";
   const text= key ? "Hide" : "Show";
 

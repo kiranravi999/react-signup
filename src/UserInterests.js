@@ -14,7 +14,7 @@ const UserInterests = () => {
     });
   }
 
-  console.log(categoryData.slice(1, 7), "datatta");
+  
   const [a, setA] = useState(categoryData);
   const [count, setCount] = useState(1);
   console.log(a, "kkkkkk");
