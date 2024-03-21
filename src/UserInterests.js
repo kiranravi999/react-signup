@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import SavedInterests from "./SavedInterests";
 import { useNavigate } from "react-router-dom";
+import Header from "./Header";
 
 const UserInterests = () => {
   const categoryData = [];
@@ -123,6 +124,8 @@ const UserInterests = () => {
   };
 
   return (
+    <div>
+    <Header/>
     <div className="con m-0 p-0 d-flex flex-column justify-content-center align-items-center">
       <form className=" form-con p-4  mt-2 d-flex flex-column">
         <h4 className="text-center">Please mark your interests!</h4>
@@ -142,6 +145,7 @@ const UserInterests = () => {
           Save
         </button>
       </form>
+    </div>
     </div>
   );
 };

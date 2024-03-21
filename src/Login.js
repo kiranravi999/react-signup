@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
-
+import Header from "./Header";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -37,6 +37,8 @@ const Login = () => {
   };
 
   return (
+    <div>
+        <Header/>
     <div className=" con m-0 p-0 d-flex flex-column justify-content-center align-items-center">
       <form className=" form-con p-5  mt-2 d-flex flex-column">
         <h4 className="text-center">Login</h4>
@@ -88,6 +90,7 @@ const Login = () => {
           <p className='h-over' onClick={()=>navigate('/signup')}>SIGN UP</p>
         </div>
       </form>
+    </div>
     </div>
   );
 };

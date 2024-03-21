@@ -1,4 +1,7 @@
 import "./App.css";
+import Header from "./Header";
+
+
 const SavedInterests = (props) => {
   const { item, Changed } = props;
 
@@ -6,6 +9,7 @@ const SavedInterests = (props) => {
     Changed(item);
   };
   return (
+    
     <div>
       <input
         type="checkbox"
@@ -15,6 +19,7 @@ const SavedInterests = (props) => {
       />
       <label className=" m-0 mb-1">{item.category}</label>
     </div>
+    
   );
 };
 export default SavedInterests;

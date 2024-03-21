@@ -2,7 +2,7 @@ import { useState } from "react";
 import cryptoRandomString from "crypto-random-string";
 import "./App.css";
 import { useNavigate } from "react-router-dom";
-
+import Header from './Header'
 import { v4 as uuidv4 } from "uuid";
 
 export default function Signup() {
@@ -65,6 +65,8 @@ export default function Signup() {
         localStorage.setItem("otp", otpValue);
         const parsed = JSON.stringify([...signupList, item]);
         localStorage.setItem("usersList", parsed);
+        const emailValue = JSON.stringify(email);
+        localStorage.setItem("email",emailValue)
 
         setTimeout(() => {
           navigate("/otp");
@@ -86,7 +88,8 @@ export default function Signup() {
         localStorage.setItem("otp", otpValue);
         const parsed = JSON.stringify([...signupList, item]);
         localStorage.setItem("usersList", parsed);
-
+        const emailValue = JSON.stringify(email);
+        localStorage.setItem("email",emailValue)
         setTimeout(() => {
           navigate("/otp");
         }, 500);
@@ -95,6 +98,8 @@ export default function Signup() {
   };
 
   return (
+    <div>
+        <Header/>
     <div className=" con m-0 p-0 d-flex flex-column justify-content-center align-items-center">
       <form className=" form-con p-4 w-25 mt-2 d-flex flex-column">
         <h4 className="text-center">Create your account</h4>
@@ -151,6 +156,7 @@ export default function Signup() {
           <p className="h-over" onClick={()=>navigate('/login')}>LOGIN</p>
         </div>
       </form>
+    </div>
     </div>
   );
 }
