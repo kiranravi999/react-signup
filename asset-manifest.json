@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/react-signup/static/css/main.de8ca60f.css",
-    "main.js": "/react-signup/static/js/main.d94b6ac3.js",
+    "main.js": "/react-signup/static/js/main.bacb0b88.js",
     "static/js/453.275a7f35.chunk.js": "/react-signup/static/js/453.275a7f35.chunk.js",
     "index.html": "/react-signup/index.html",
     "main.de8ca60f.css.map": "/react-signup/static/css/main.de8ca60f.css.map",
-    "main.d94b6ac3.js.map": "/react-signup/static/js/main.d94b6ac3.js.map",
+    "main.bacb0b88.js.map": "/react-signup/static/js/main.bacb0b88.js.map",
     "453.275a7f35.chunk.js.map": "/react-signup/static/js/453.275a7f35.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.de8ca60f.css",
-    "static/js/main.d94b6ac3.js"
+    "static/js/main.bacb0b88.js"
   ]
 }
