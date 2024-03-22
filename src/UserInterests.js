@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import SavedInterests from "./SavedInterests";
-import { useNavigate } from "react-router-dom";
+import {Redirect } from "react-router-dom";
 import Header from "./Header";
 
 const UserInterests = () => {
@@ -17,8 +17,7 @@ const UserInterests = () => {
   
   const [a, setA] = useState(categoryData);
   const [count, setCount] = useState(1);
-  console.log(a, "kkkkkk");
-  const navigate = useNavigate();
+  const [redirect, setRedirect] = useState(false);
 
   useEffect(() => {
     let signedUser = JSON.parse(localStorage.getItem("loginUser"));
@@ -67,8 +66,13 @@ const UserInterests = () => {
       JSON.stringify([...loginusersList, obj])
     );
 
-    navigate("/login");
+   setRedirect(true)
   };
+
+
+  if (redirect) {
+    return <Redirect to="/login" />;
+  }
 
   const increaseCount = () => {
     if (count < 17) {

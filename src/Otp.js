@@ -1,17 +1,18 @@
 import { React, useState, useEffect } from "react";
 import OTPInput from "otp-input-react";
-import { useNavigate } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import "./App.css";
 import Header from "./Header";
 const Otp = () => {
   const [OTP, setOTP] = useState("");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const otpSent = JSON.parse(localStorage.getItem("otp"));
   const emailValue=JSON.parse(localStorage.getItem("email"));
+  const [redirect, setRedirect] = useState(false);
+
   function hideEmail(text) {
     
     const [localPart, domainPart] = text.split("@");
-    
     const firstThreeCharacters = localPart.slice(0, 3);
     const hiddenLocalPart = firstThreeCharacters + "*".repeat(localPart.length - 3);
     return hiddenLocalPart + "@" + domainPart;
@@ -23,13 +24,19 @@ const Otp = () => {
 
   useEffect(() => alert(`Please Copy Your OTP: ${otpSent}`), []);
 
-  const onVerify = () => {
+  const onVerify = (event) => {
+    event.preventDefault()
     if (parseInt(otpSent) === parseInt(OTP)) {
-      navigate("/login");
+      setRedirect(true)
     } else {    
       alert("invaild OTP");
     }
   };
+
+  
+  if (redirect) {
+    return <Redirect to="/login" />;
+  }
 
   return (
     <div>

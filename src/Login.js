@@ -1,16 +1,30 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import "./App.css";
 import Header from "./Header";
+import Signup from "./Signup";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError,setEmailError]=useState(false)
   const [passwordError,setPasswordError]=useState(false)
   const [key, setKey] = useState(false);
-  const navigate = useNavigate();
+  const [redirect, setRedirect] = useState(false);
+  const [redirectSignup,  setRedirectSignup]=useState(false)
+  // const navigate = useNavigate();
   const type = key ? "text" : "password";
   const text= key ? "Hide" : "Show";
+
+
+
+    
+  const onSignup = () => {
+   setRedirectSignup(true)
+  }
+
+  if (redirectSignup) {
+    return <Redirect to="/signup" />;
+  }
 
   const onLogin = () => {
     let stringifiedUsersList = localStorage.getItem("usersList");
@@ -28,12 +42,16 @@ const Login = () => {
       );
       if (foundUser) {
         localStorage.setItem("loginUser", JSON.stringify(foundUser.id));
-        navigate("/interests");
+        setRedirect(true)
       } else {
         alert("User not found.Please crete youur account");
       }
     }
   };
+
+  if (redirect) {
+    return <Redirect to="/interests" />;
+  }
 
   return (
     <div>
@@ -86,7 +104,7 @@ const Login = () => {
         </button>
         <div className="d-flex justify-content-center">
           <p className="mr-2">Don't have an Account?</p>
-          <p className='h-over' onClick={()=>navigate('/signup')}>SIGN UP</p>
+          <p className='h-over' onClick={onSignup}>SIGN UP</p>
         </div>
       </form>
     </div>

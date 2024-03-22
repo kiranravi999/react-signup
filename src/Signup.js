@@ -1,12 +1,14 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import cryptoRandomString from "crypto-random-string";
 import "./App.css";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import {Redirect} from 'react-router-dom'
 import Header from './Header'
 import { v4 as uuidv4 } from "uuid";
 
 export default function Signup() {
-  
+  const [redirectToOtp, setRedirectToOtp] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [nameError,setnameError]=useState(false)
@@ -14,18 +16,39 @@ export default function Signup() {
   const [passwordError,setPasswordError]=useState(false)
   const [password, setPassword] = useState("");
   const otp = cryptoRandomString({ length: 8, type: "numeric" });
-  const navigate = useNavigate();
-  function getUsersListFromLocalStorage() {
-    let stringifiedUsersList = localStorage.getItem("usersList");
-    let parsedUsersList = JSON.parse(stringifiedUsersList);
-    if (parsedUsersList === null) {
-      return [];
-    } else {
-      return parsedUsersList;
-    }
-  }
+  const [signupList, setSignupList] = useState([]);
+  const [redirect, setRedirect] = useState(false);
+  // const navigate = useNavigate();
+  // function getUsersListFromLocalStorage() {
+  //   let stringifiedUsersList = localStorage.getItem("usersList");
+  //   let parsedUsersList = JSON.parse(stringifiedUsersList);
+  //   if (parsedUsersList === null) {
+  //     return [];
+  //   } else {
+  //     return parsedUsersList;
+  //   }
+  // }
 
-  let signupList = getUsersListFromLocalStorage();
+  // let signupList = getUsersListFromLocalStorage();
+
+
+  useEffect(() => {
+    // Fetch signup list from local storage on component mount
+    const getUsersListFromLocalStorage = () => {
+      let stringifiedUsersList = localStorage.getItem("usersList");
+      let parsedUsersList = JSON.parse(stringifiedUsersList);
+      if (parsedUsersList === null) {
+        return [];
+      } else {
+        return parsedUsersList;
+      }
+    };
+
+    setSignupList(getUsersListFromLocalStorage());
+  }, []);
+
+
+ 
 
   // Handling the name change
   const handleName = (e) => {
@@ -37,15 +60,26 @@ export default function Signup() {
     setEmail(e.target.value);
   };
 
+  
+  const onLogin = () => {
+    console.log("Clickeddd");
+   setRedirect(true)
+  }
+
+  if (redirect) {
+    return <Redirect to="/login" />;
+  }
+
   // Handling the password change
   const handlePassword = (e) => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-   
+ 
 
+  const handleSubmit = async(event) => {
+    event.preventDefault();
+  
     if (!name){
       setnameError(true)
     }
@@ -69,9 +103,12 @@ export default function Signup() {
         const emailValue = JSON.stringify(email);
         localStorage.setItem("email",emailValue)
 
-        setTimeout(() => {
-          navigate("/otp");
-        }, 500);
+        setRedirectToOtp(true)
+        // setTimeout(() => 
+        //   setRedirectToOtp(true)
+
+        // , 500);
+        
       }
 
     if (name && email && password && signupList.length > 0) {
@@ -79,6 +116,8 @@ export default function Signup() {
       if (foundUser) {
         alert("User Already Exists");
       } else {
+
+       
         const item = {
           id: uuidv4(),
           email,
@@ -91,14 +130,28 @@ export default function Signup() {
         localStorage.setItem("usersList", parsed);
         const emailValue = JSON.stringify(email);
         localStorage.setItem("email",emailValue)
-        setTimeout(() => {
-          navigate("/otp");
-        }, 500);
+        // setTimeout(() => 
+        //   setRedirectToOtp(true)
+
+        // , 1000);
+        setRedirectToOtp(true)
       }
     }
   };
 
+  // if (redirectToOtp) {
+   
+  //   return <Redirect to="/otp" />;
+    
+  // }
+  if (redirectToOtp) {
+    return <Redirect to="/otp" />;
+  }
+
   return (
+
+   
+   
     <div>
         <Header/>
     <div className=" con m-0 p-0 d-flex flex-column justify-content-center align-items-center">
@@ -149,15 +202,21 @@ export default function Signup() {
        :
        <p className="text-danger">Please enter the password</p>
        }
-        <button onClick={handleSubmit} className="btn btn-dark  mb-3">
+        <button onClick={handleSubmit} type="submit" className="btn btn-dark  mb-3">
           Create account
         </button>
         <div className="d-flex justify-content-center">
           <p className="mr-2">Have an account?</p>
-          <p className="h-over" onClick={()=>navigate('/login')}>LOGIN</p>
+          <p className="h-over" onClick={
+          
+          onLogin
+
+        }>LOGIN</p>
         </div>
       </form>
     </div>
     </div>
+
+
   );
 }
