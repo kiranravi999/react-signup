@@ -130,7 +130,7 @@ const UserInterests = () => {
   return (
     <div>
     <Header/>
-    <div className="con m-0 p-0 d-flex flex-column justify-content-center align-items-center">
+    <div className="con m-0 p-0 d-flex flex-column justify-content-center align-items-center mt-3">
       <form className=" form-con p-4  mt-2 d-flex flex-column">
         <h4 className="text-center">Please mark your interests!</h4>
         <p className="text-center">We will keep you notified.</p>

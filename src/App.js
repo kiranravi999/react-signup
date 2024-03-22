@@ -13,17 +13,14 @@ import Login from "./Login";
 
  
     const App = () => (
-      <Router>
-          <div>
-        <Signup/>
-        
+      <Router> 
       <Switch>
+      <Route exact path="/" component={Signup} /> 
         <Route exact path="/signup" component={Signup} /> 
         <Route exact path="/login" component={Login} />
          <Route exact path="/interests" component={UserInterests} />
         <Route exact path="/otp" component={Otp} />
       </Switch>
-      </div>
  </Router>
           
           

@@ -9,16 +9,20 @@ const Otp = () => {
   const otpSent = JSON.parse(localStorage.getItem("otp"));
   const emailValue=JSON.parse(localStorage.getItem("email"));
   const [redirect, setRedirect] = useState(false);
+ 
 
-  function hideEmail(text) {
+  const starredEmail=emailValue.length<14? emailValue[0]+ "***"+"@gmail.com":emailValue.slice(0,3)+ "*******"+"@gmail.com"
+
+  // function hideEmail(text) {
     
-    const [localPart, domainPart] = text.split("@");
-    const firstThreeCharacters = localPart.slice(0, 3);
-    const hiddenLocalPart = firstThreeCharacters + "*".repeat(localPart.length - 3);
-    return hiddenLocalPart + "@" + domainPart;
-  }
+  //   const [localPart, domainPart] = text.split("@");
+    
+  //   const firstThreeCharacters = text.length<14?localPart.slice(0, 1):localPart.slice(0, 3)
+  //   const hiddenLocalPart = firstThreeCharacters + "*".repeat(localPart.length - 3);
+  //   return hiddenLocalPart + "@" + domainPart;
+  // }
   
-  const hiddenEmail = hideEmail(emailValue);
+  // const hiddenEmail = hideEmail(emailValue);
   
   
 
@@ -45,7 +49,7 @@ const Otp = () => {
       <form className=" text-center form-con p-4  mt-3 d-flex flex-column">
         <h4 className="mt-3">Verify your Email</h4>
         <p className="mt-3">
-          Enter the 8 digit code you have received on {hiddenEmail}
+          Enter the 8 digit code you have received on {starredEmail}
         </p>
 
         <OTPInput
